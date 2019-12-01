@@ -1,6 +1,26 @@
 #ifndef DEFS_H
 #define DEFS_H
 
+#include "stdlib.h"
+
+// from book "beginning programming in C++"
+// very important for debugging
+
+#define DEBUG
+
+#ifndef DEBUG
+#define ASSERT(n)
+#else
+#define ASSERT(n) \
+if(!(n)) { \
+printf("%s - Failed",#n); \
+printf("On %s ", __DATE__); \
+printf("At %s ", __TIME__); \
+printf("In File %s ", __FILE__); \
+printf("At Line %d\n ", __LINE__); \
+exit(1);}
+#endif
+
 typedef unsigned long long U64;
 
 #define NAME "Vice 1.0"
@@ -60,6 +80,11 @@ typedef struct {
 	int minPce[3]; // bishops and knights
 
 	S_UNDO history[MAX_GAME_MOVES];
+
+	// saves time over looping through all of the spaces on the board
+	// piece list 
+	int pList[13][10];
+
 
 } S_BOARD;
 
